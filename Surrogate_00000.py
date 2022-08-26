@@ -91,7 +91,7 @@ def train(studyname, database, objective, batchsize, normalization, nnodes, dept
     plt.xlabel('epoch')
     plt.legend(['train', 'val'], loc='upper left')
     #plt.show()
-    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%05depochstrain_loss.png' %(nnodes, depth, epochs))
+    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%05depochs_train_loss.png' %(nnodes, depth, epochs))
     plt.clf()
     
     Y_pred = model.predict(X_train)
@@ -102,7 +102,7 @@ def train(studyname, database, objective, batchsize, normalization, nnodes, dept
     plt.ylabel('Train value')
     plt.xlabel('Prediction')
     #plt.show()
-    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%05depochstrain.png' %(nnodes, depth, epochs))
+    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%05depochs_train.png' %(nnodes, depth, epochs))
     plt.clf()
     
     
@@ -118,7 +118,7 @@ def train(studyname, database, objective, batchsize, normalization, nnodes, dept
     plt.ylabel('Test value')
     plt.xlabel('Prediction')
     #plt.show()
-    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%05depochstest.png' %(nnodes, depth, epochs))
+    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%05depochs_test.png' %(nnodes, depth, epochs))
     plt.clf()
     
     return results
@@ -142,7 +142,10 @@ if __name__ == '__main__':
     depth += 1
     train(studyname, database, objective, batchsize, normalization, nnodes, depth, epochs) # 3 layer
     print(time.time() - start_time)
-    depth += 2
+    depth += 1
+    train(studyname, database, objective, batchsize, normalization, nnodes, depth, epochs) # 4 layer
+    print(time.time() - start_time)
+    depth += 1
     train(studyname, database, objective, batchsize, normalization, nnodes, depth, epochs) # 5 layer
     print(time.time() - start_time)
     depth += 1
