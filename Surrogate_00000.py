@@ -63,7 +63,7 @@ def train(studyname, database, objective, batchsize, normalization, nnodes, dept
     Y_train, Y_test = np.split(Y, [int(len(X)*0.8)])
     
     # Check if model exists
-    if not os.path.exists(studyname + '_%03dneurons_%03dlayers_%04depochs_save' %(nnodes, depth, epochs)):
+    if not os.path.exists(studyname + '_%03dneurons_%03dlayers_%05depochs_save' %(nnodes, depth, epochs)):
         # Create model
         model = Sequential()
         model.add(Dense(nnodes, input_shape=(len(list(X[0])), ), activation='tanh'))
@@ -72,7 +72,7 @@ def train(studyname, database, objective, batchsize, normalization, nnodes, dept
         
         model.add(Dense(1))
     else:
-        model = load_model(studyname + '_%03dneurons_%03dlayers_%04depochs_save' %(nnodes, depth, epochs))
+        model = load_model(studyname + '_%03dneurons_%03dlayers_%05depochs_save' %(nnodes, depth, epochs))
     
     # Train
     optimiser = Adam(lr=0.001, beta_1=0.9, beta_2=0.999)
@@ -91,7 +91,7 @@ def train(studyname, database, objective, batchsize, normalization, nnodes, dept
     plt.xlabel('epoch')
     plt.legend(['train', 'val'], loc='upper left')
     #plt.show()
-    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%04depochstrain_loss.png' %(nnodes, depth, epochs))
+    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%05depochstrain_loss.png' %(nnodes, depth, epochs))
     plt.clf()
     
     Y_pred = model.predict(X_train)
@@ -102,12 +102,12 @@ def train(studyname, database, objective, batchsize, normalization, nnodes, dept
     plt.ylabel('Train value')
     plt.xlabel('Prediction')
     #plt.show()
-    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%04depochstrain.png' %(nnodes, depth, epochs))
+    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%05depochstrain.png' %(nnodes, depth, epochs))
     plt.clf()
     
     
     # Save model
-    model.save(studyname + '_%03dneurons_%03dlayers_%04depochs_save' %(nnodes, depth, epochs))
+    model.save(studyname + '_%03dneurons_%03dlayers_%05depochs_save' %(nnodes, depth, epochs))
     
     # Create test plot
     Y_pred = model.predict(X_test)
@@ -118,7 +118,7 @@ def train(studyname, database, objective, batchsize, normalization, nnodes, dept
     plt.ylabel('Test value')
     plt.xlabel('Prediction')
     #plt.show()
-    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%04depochstest.png' %(nnodes, depth, epochs))
+    plt.savefig('fig/' + studyname + '_%03dneurons_%03dlayers_%05depochstest.png' %(nnodes, depth, epochs))
     plt.clf()
     
     return results
